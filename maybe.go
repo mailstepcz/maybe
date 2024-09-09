@@ -1,5 +1,5 @@
 // Package maybe provides a sum type inspired by Haskell's Maybe monad.
-// Instance can by associated with a value or be empty.
+// Instances can by associated with a value or be empty.
 // The [Unit] function is used to create an instance with a value.
 // The [Nothing] function is used to create an instance without an associated value.
 package maybe

@@ -3,6 +3,7 @@ package maybe
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strconv"
 	"testing"
 
@@ -81,4 +82,16 @@ func TestNew(t *testing.T) {
 
 	req.Equal(Unit(1234), New(pointer.To(1234)))
 	req.Equal(Nothing[int](), New[int](nil))
+}
+
+func ExampleUnit() {
+	m := Unit(1234)
+	fmt.Println(m)
+	// Output: {1234 true}
+}
+
+func ExampleNothing() {
+	m := Nothing[int]()
+	fmt.Println(m)
+	// Output: {0 false}
 }

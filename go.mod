@@ -3,8 +3,8 @@ module github.com/mailstepcz/maybe
 go 1.22.0
 
 require (
-	github.com/mailstepcz/pointer v0.1.0
-	github.com/stretchr/testify v1.9.0
+	github.com/mailstepcz/pointer v0.1.1
+	github.com/stretchr/testify v1.10.0
 )
 
 require (

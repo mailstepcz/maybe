@@ -229,6 +229,14 @@ func (m Maybe[T]) Value() (driver.Value, error) {
 		return float64(v), nil
 	}
 
+	if driver.IsValue(m.Val) {
+		return m.Val, nil
+	}
+	// non-Value types the default converter knows, e.g. stdlib uuid.UUID or named string types
+	if v, err := driver.DefaultParameterConverter.ConvertValue(m.Val); err == nil {
+		return v, nil
+	}
+
 	return m.Val, nil
 }
 

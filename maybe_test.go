@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/mailstepcz/pointer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -80,7 +79,7 @@ func TestGetOr(t *testing.T) {
 func TestNew(t *testing.T) {
 	req := require.New(t)
 
-	req.Equal(Unit(1234), New(pointer.To(1234)))
+	req.Equal(Unit(1234), New(new(1234)))
 	req.Equal(Nothing[int](), New[int](nil))
 }
 
@@ -94,4 +93,32 @@ func ExampleNothing() {
 	m := Nothing[int]()
 	fmt.Println(m)
 	// Output: {0 false}
+}
+
+type namedString string
+
+func TestValue(t *testing.T) {
+	t.Run("named string type is converted to string", func(t *testing.T) {
+		req := require.New(t)
+
+		v, err := Unit(namedString("abc")).Value()
+		req.NoError(err)
+		req.Equal("abc", v)
+	})
+
+	t.Run("type unknown to the default converter is returned as is", func(t *testing.T) {
+		req := require.New(t)
+
+		v, err := Unit([]string{"a", "b"}).Value()
+		req.NoError(err)
+		req.Equal([]string{"a", "b"}, v)
+	})
+
+	t.Run("nothing is nil", func(t *testing.T) {
+		req := require.New(t)
+
+		v, err := Nothing[namedString]().Value()
+		req.NoError(err)
+		req.Nil(v)
+	})
 }

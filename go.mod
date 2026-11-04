@@ -1,6 +1,6 @@
 module github.com/mailstepcz/maybe
 
-go 1.22.0
+go 1.27.0
 
 require (
 	github.com/mailstepcz/pointer v0.1.1

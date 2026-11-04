@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/mailstepcz/pointer"
 	"github.com/stretchr/testify/require"
 )
 
@@ -80,7 +79,7 @@ func TestGetOr(t *testing.T) {
 func TestNew(t *testing.T) {
 	req := require.New(t)
 
-	req.Equal(Unit(1234), New(pointer.To(1234)))
+	req.Equal(Unit(1234), New(new(1234)))
 	req.Equal(Nothing[int](), New[int](nil))
 }
 
